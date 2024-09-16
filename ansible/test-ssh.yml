@@ -1,0 +1,6 @@
+---
+- name: Test SSH connectivity to kind nodes
+  hosts: kubernetes_nodes
+  tasks:
+    - name: Ping the node
+      ping:

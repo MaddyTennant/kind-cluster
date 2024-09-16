@@ -1,0 +1,21 @@
+---
+- name: Update CA certificates on Kubernetes nodes
+  hosts: kubernetes_nodes
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install CA certificates
+      apt:
+        name: ca-certificates
+        state: latest
+
+    - name: Update CA certificates
+      command: update-ca-certificates
+
+    - name: Restart Docker
+      systemd:
+        name: docker
+        state: restarted
